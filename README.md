@@ -2,7 +2,6 @@
 <div align="center">
 <h1>
 Exploring the Effect of Reinforcement Learning on Video Understanding: 
-
 Insights from SEED-Bench-R1
 
 <a href=''><img src='https://img.shields.io/badge/Paper-Arxiv-red'></a> 
