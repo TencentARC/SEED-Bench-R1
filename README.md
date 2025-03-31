@@ -4,7 +4,7 @@
 Exploring the Effect of Reinforcement Learning on Video Understanding: 
 Insights from SEED-Bench-R1
 
-<a href=''><img src='https://img.shields.io/badge/Paper-Arxiv-red'></a> 
+<a href=''><img src='https://img.shields.io/badge/Technical Report-Arxiv-red'></a> 
 <a href='https://huggingface.co/datasets/TencentARC/SEED-Bench-R1'><img src='https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Dataset-blue'></a>
 </h1>
 
