@@ -90,7 +90,7 @@ bash scripts/sft.sh
 
 Inference with the post-trained models
 ```
-python infer.py
+bash scripts/eval.sh
 ```
 
 
