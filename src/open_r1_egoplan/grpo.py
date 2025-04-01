@@ -16,10 +16,9 @@ import os
 import re
 from dataclasses import dataclass, field
 from datetime import datetime
-from typing import Optional
+from typing import Optional, List
 
-from datasets import load_dataset
-from transformers import Qwen2VLForConditionalGeneration
+from datasets import load_dataset, Dataset, DatasetDict
 
 from math_verify import parse, verify
 from open_r1_egoplan.trainer import Qwen2VLGRPOTrainer
@@ -33,11 +32,11 @@ class GRPOScriptArguments(ScriptArguments):
     Script arguments for the GRPO training script.
 
     Args:
-        reward_funcs (`list[str]`):
+        reward_funcs (`List[str]`):
             List of reward functions. Possible values: 'accuracy', 'format'.
     """
 
-    reward_funcs: list[str] = field(
+    reward_funcs: List[str] = field(
         default_factory=lambda: ["accuracy",],
         metadata={"help": "List of reward functions. Possible values: 'accuracy', 'format'"},
     )
@@ -127,15 +126,6 @@ reward_funcs_registry = {
     "format": format_reward,
 }
 
-SYSTEM_PROMPT = (
-    "A conversation between User and Assistant. The user asks a question, and the Assistant solves it. The assistant "
-    "first thinks about the reasoning process in the mind and then provides the user with the answer. The reasoning "
-    "process and answer are enclosed within <think> </think> and <answer> </answer> tags, respectively, i.e., "
-    "<think> reasoning process here </think><answer> answer here </answer>"
-)
-
-from datasets import Dataset, DatasetDict
-import json
 
 def create_dataset_from_jsonl_simple(jsonl_path):
     base_dataset = Dataset.from_json(jsonl_path)
@@ -156,14 +146,6 @@ def main(script_args, training_args, model_args):
         dataset = load_dataset(script_args.dataset_name, name=script_args.dataset_config)
 
     # Format into conversation
-    def make_conversation(example):
-        return {
-            "prompt": [
-                {"role": "system", "content": SYSTEM_PROMPT},
-                {"role": "user", "content": example["problem"]},
-            ],
-        }
-
     QUESTION_TEMPLATE = "{Question} Output the thinking process in <think> </think> and final answer in <answer> </answer> tags, i.e., <think> reasoning process here </think><answer> answer here </answer>. "
 
     def make_conversation_egoplan(example, data_root_dir):
@@ -201,27 +183,9 @@ def main(script_args, training_args, model_args):
             'solution': solution,
         }
 
-        # if len(example['task_progress_metadata']) > 0:
-        #     video_path = os.path.join(data_root_dir, 'videos', example['video_source'], example['video_basename'])
-        #     feature['video'] = video_path
-        # image_path = os.path.join(data_root_dir, 'images', example['video_source'], example['current_observation_basename'])
-        # feature['image'] = image_path
-
         return feature
 
     dataset = dataset.map(partial(make_conversation_egoplan, data_root_dir=script_args.data_root_dir))
-    # if "image" in dataset[script_args.dataset_train_split].features:
-    #     dataset = dataset.map(make_conversation_image)  # Utilize multiprocessing for faster mapping
-    # elif "video" in dataset[script_args.dataset_train_split].features:
-    #     dataset = dataset.map(
-    #         make_conversation_video,
-    #     )
-    # else:
-    #     dataset = dataset.map(make_conversation)
-    #     dataset = dataset.remove_columns("messages")
-    
-    # import pdb; pdb.set_trace()
-
     trainer_cls = Qwen2VLGRPOTrainer
 
     # Initialize the GRPO trainer

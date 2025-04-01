@@ -4,7 +4,7 @@
 Exploring the Effect of Reinforcement Learning on Video Understanding: 
 Insights from SEED-Bench-R1
 
-<a href=''><img src='https://img.shields.io/badge/Technical Report-Arxiv-red'></a> 
+<a href='https://arxiv.org/pdf/2503.24376'><img src='https://img.shields.io/badge/Technical Report-Arxiv-red'></a> 
 <a href='https://huggingface.co/datasets/TencentARC/SEED-Bench-R1'><img src='https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Dataset-blue'></a>
 </h1>
 
@@ -110,10 +110,21 @@ We sincerely thank the contributions from the open source community. The related
 - [Open-R1](https://github.com/huggingface/open-r1)
 - [OpenRLHF](https://github.com/OpenRLHF/OpenRLHF)
 
+## ⭐License
+The video samples in SEED-Bench-R1 are collected from [Epic-Kitchens](https://epic-kitchens.github.io/2025) and [Ego4D](https://ego4d-data.org/). Users must follow the related licenses ([Epic-Kitchens](https://creativecommons.org/licenses/by-nc/4.0/) and [Ego4D](https://ego4ddataset.com/ego4d-license/)) to use these video samples for training and validation. SEED-Bench-R1 does not hold the copyright for these videos and the copyright belongs to the original owner of these datasets.
+
+
 ## 📚Citation
-f you find our project helpful, hope you can star our repository and cite our paper as follows:
+If you find our project helpful, hope you can star our repository and cite our paper as follows:
 
 ```bibtex
+@article{chen2025seedbenchr1,
+  title={Exploring the Effect of Reinforcement Learning on Video Understanding: Insights from SEED-Bench-R1},
+  author={Chen, Yi and Ge, Yuying and Wang, Rui and Ge, Yixiao and Qiu, Lu and Shan, Ying and Liu, Xihui},
+  journal={arXiv preprint arXiv:2503.24376},
+  year={2025}
+}
+
 @article{chen2023egoplan,
   title={Egoplan-bench: Benchmarking multimodal large language models for human-level planning},
   author={Chen, Yi and Ge, Yuying and Ge, Yixiao and Ding, Mingyu and Li, Bohao and Wang, Rui and Xu, Ruifeng and Shan, Ying and Liu, Xihui},
