@@ -118,7 +118,7 @@ The video samples in SEED-Bench-R1 are collected from [Epic-Kitchens](https://ep
 If you find our project helpful, hope you can star our repository and cite our paper as follows:
 
 ```bibtex
-@article{chen2025seedbenchr1,
+@article{chen2025exploring,
   title={Exploring the Effect of Reinforcement Learning on Video Understanding: Insights from SEED-Bench-R1},
   author={Chen, Yi and Ge, Yuying and Wang, Rui and Ge, Yixiao and Qiu, Lu and Shan, Ying and Liu, Xihui},
   journal={arXiv preprint arXiv:2503.24376},
